@@ -1,0 +1,78 @@
+
+### Create new User (Bob123)
+
+POST http://localhost:5000/user/register
+Content-Type: application/json
+
+{
+    "Email": "test@bob.com",
+    "Username": "bob123",
+    "Password": "bob123"
+}
+
+
+### Create new User (Tommy123)
+
+POST http://localhost:5000/user/register
+Content-Type: application/json
+
+{
+    "Email": "Tom@hotmail.com",
+    "Username": "tommy123",
+    "Password": "password123"
+}
+
+### Authenticate user
+
+POST http://localhost:5000/user/authenticate
+Content-Type: application/json
+
+{
+    "Email": "test@bob.com",
+    "Username": "bob123",
+    "Password": "bob123"
+}
+
+
+### Get all users
+
+GET http://localhost:5000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
+
+
+### Get Bob123 (id 1)
+
+GET http://localhost:5000/user/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
+
+
+### Update Bobs Username
+
+PUT http://localhost:5000/user/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
+Content-Type: application/json
+
+{
+    "Email": "test@bob.com",
+    "Username": "bob12345",
+    "Password": "bob123"
+}
+
+
+### Update Bobs Password
+
+PUT http://localhost:5000/user/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
+Content-Type: application/json
+
+{
+    "Email": "test@bob.com",
+    "Username": "bob12345",
+    "Password": "bob12345"
+}
+
+
+### Delete Bob
+
+DELETE  http://localhost:5000/user/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s

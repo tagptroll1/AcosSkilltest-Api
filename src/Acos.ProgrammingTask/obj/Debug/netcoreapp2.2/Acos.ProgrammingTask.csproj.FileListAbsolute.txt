@@ -1,0 +1,14 @@
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/bin/Debug/netcoreapp2.2/Acos.ProgrammingTask.deps.json
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/bin/Debug/netcoreapp2.2/Acos.ProgrammingTask.runtimeconfig.json
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/bin/Debug/netcoreapp2.2/Acos.ProgrammingTask.runtimeconfig.dev.json
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/bin/Debug/netcoreapp2.2/Acos.ProgrammingTask.dll
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/bin/Debug/netcoreapp2.2/Acos.ProgrammingTask.pdb
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.csprojAssemblyReference.cache
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.csproj.CoreCompileInputs.cache
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.RazorAssemblyInfo.cache
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.RazorAssemblyInfo.cs
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.AssemblyInfoInputs.cache
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.AssemblyInfo.cs
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.RazorTargetAssemblyInfo.cache
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.dll
+/home/thomas/Documents/ACOS/Programmerings-oppgave/src/Acos.ProgrammingTask/obj/Debug/netcoreapp2.2/Acos.ProgrammingTask.pdb
