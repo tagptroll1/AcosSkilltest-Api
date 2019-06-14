@@ -9,5 +9,6 @@ namespace Acos.ProgrammingTask.Models
         public string Content { get; set; }
         public DateTime created { get; set; }
         public bool Finished { get; set; }
+        public PostIt PostIt { get; set; }
     }
 }

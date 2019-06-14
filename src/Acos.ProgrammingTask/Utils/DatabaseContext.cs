@@ -9,5 +9,6 @@ namespace Acos.ProgrammingTask.Utils
             : base (options) {}
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Whiteboard> Whiteboards { get; set;}
     }
 }

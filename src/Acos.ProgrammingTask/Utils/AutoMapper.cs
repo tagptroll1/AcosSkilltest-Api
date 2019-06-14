@@ -9,6 +9,10 @@ namespace Acos.ProgrammingTask.Utils
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+            CreateMap<Whiteboard, WhiteboardDtoIn>();
+            CreateMap<Whiteboard, WhiteboardDtoOut>();
+            CreateMap<WhiteboardDtoIn, Whiteboard>();
+            CreateMap<WhiteboardDtoIn, WhiteboardDtoOut>();
         }
     }
 }

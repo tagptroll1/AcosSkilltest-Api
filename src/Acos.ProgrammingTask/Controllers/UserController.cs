@@ -72,7 +72,7 @@ namespace Acos.ProgrammingTask.Controllers
             var user = _mapper.Map<User>(userDto);
             try {
                 await _userService.CreateUser(user, userDto.Password);
-                return Ok();
+                return CreatedAtAction(nameof(GetById), new { id = userDto.Id}, userDto);
             }
             catch(UserException ex)
             {
@@ -85,6 +85,9 @@ namespace Acos.ProgrammingTask.Controllers
         {
             var users = await _userService.GetAll();
             var userDtos = _mapper.Map<IList<UserDto>>(users);
+
+            if (users == null)
+                return NotFound();
             return Ok(userDtos);
         }
 
@@ -93,6 +96,9 @@ namespace Acos.ProgrammingTask.Controllers
         {
             var user = await _userService.GetUserById(id);
             var userDto = _mapper.Map<UserDto>(user);
+
+            if (user == null)
+                return NotFound();
             return Ok(userDto);
         }
 

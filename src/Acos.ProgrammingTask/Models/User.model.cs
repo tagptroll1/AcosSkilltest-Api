@@ -8,7 +8,6 @@ namespace Acos.ProgrammingTask.Models
         public string Username { get; set; }
         public byte[] PassHash { get; set; }
         public byte[] PassSalt { get; set; }
-        public Whiteboard[] Boards { get; set; }
     }
 
     public class UserDto

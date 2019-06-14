@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Acos.ProgrammingTask.Models;
 using Acos.ProgrammingTask.Utils;
@@ -15,6 +16,7 @@ namespace Acos.ProgrammingTask.Services
         Task<User> CreateUser(User user, string password);
         Task UpdateUser(User user, string password = null);
         Task DeleteUser(int id);
+        Task<User> JustFindHim(string query);
     }
 
     public class UserService : IUserService
@@ -24,6 +26,26 @@ namespace Acos.ProgrammingTask.Services
         public UserService(DatabaseContext context)
         {
             _ctx = context;
+        }
+
+        public async Task<User> JustFindHim(string query)
+        {
+            User user;
+
+            try {
+                var id = Int32.Parse(query);
+                user = await _ctx.Users.FindAsync(id);
+
+                if (user != null)
+                    return user;
+            }
+            catch (Exception){}
+
+            user =  await _ctx.Users
+                .Where(u => u.Username == query || u.Email == query)
+                .FirstOrDefaultAsync();
+
+            return user;
         }
 
         public async Task<User> Authenticate(string username, string password)
@@ -97,7 +119,7 @@ namespace Acos.ProgrammingTask.Services
 
             user.Username = userIn.Username;
 
-            if (!string.IsNullOrWhiteSpace(password));
+            if (!string.IsNullOrWhiteSpace(password))
             {
                 byte[] passHash;
                 byte[] passSalt;
