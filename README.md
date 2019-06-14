@@ -4,7 +4,6 @@
 Note: Most endpoints require the Authorization header with a token provided by the api from /user/authenticate.  Endpoints marked with **Anonymous** does not require the token.
 
 ### /User
-TODO: Write this.
 
 #### POST /user/register **Anonymous**
 Registers a user on the server.  
