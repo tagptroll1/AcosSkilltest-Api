@@ -1,11 +1,13 @@
 # Programming-Task: Todo App  
 
 ## API
---------
-### /User endpoint
+
+
+### /User
+TODO: Write this.
 
 --------
-### /Whiteboard endpoint
+### /whiteboard
 
 #### GET /Whiteboard/{id}
 Gets a whiteboard object by the `id` parameter.  
@@ -38,6 +40,8 @@ Transfer-Encoding: chunked
   }
 }
 ```  
+--------
+
 
 #### GET /Whiteboard/user/{id}
 Gets an arroy of whiteboard objects by the `id` of a user.  
@@ -72,6 +76,8 @@ Transfer-Encoding: chunked
   }
 ]
 ```
+--------
+
 
 #### GET /Whiteboard
 Gets an arroy of all whiteboards available.  
@@ -106,6 +112,8 @@ Transfer-Encoding: chunked
   }
 ]
 ```
+--------
+
 
 #### POST /Whiteboard/new
 Creates a new Whiteboard for the User specified in the Owner field.
@@ -149,12 +157,16 @@ Location: https://localhost:5001/Whiteboard/0
   "owner": "bob123"
 }
 ```
+--------
+
 
 #### PUT /Whiteboard/id
 Updates an existing whiteboard  
 
 **Parameters:**
 * Object representing new Whiteboard (Body)
+--------
+
 
 #### DELETE /Whiteboard/id
 Deletes a Whiteboard by id
