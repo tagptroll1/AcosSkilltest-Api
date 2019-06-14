@@ -66,7 +66,7 @@ namespace Acos.ProgrammingTask.Controllers
         }
 
         [HttpPost("new")]
-        public async Task<IActionResult> CreateNew(WhiteboardDtoIn boardDto)
+        public async Task<IActionResult> CreateNew([FromBody]WhiteboardDtoIn boardDto)
         {
             if (boardDto.Owner == null)
                 return BadRequest(new { message = "You must provide a Owner id, email or username to the Owner field" });
