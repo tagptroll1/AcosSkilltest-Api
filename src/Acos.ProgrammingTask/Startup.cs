@@ -49,7 +49,7 @@ namespace Acos.ProgrammingTask
                     {
                         var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
                         var userId = int.Parse(context.Principal.Identity.Name);
-                        var user = userService.GetUserById(userId);
+                        var user = userService.GetById(userId);
                         if (user == null)
                             context.Fail("Unauthorized");
                         

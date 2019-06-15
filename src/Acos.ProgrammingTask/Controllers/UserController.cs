@@ -71,7 +71,7 @@ namespace Acos.ProgrammingTask.Controllers
         {
             var user = _mapper.Map<User>(userDto);
             try {
-                await _userService.CreateUser(user, userDto.Password);
+                await _userService.Create(user, userDto.Password);
                 return CreatedAtAction(nameof(GetById), new { id = userDto.Id}, userDto);
             }
             catch(UserException ex)
@@ -94,7 +94,7 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var user = await _userService.GetUserById(id);
+            var user = await _userService.GetById(id);
             var userDto = _mapper.Map<UserDto>(user);
 
             if (user == null)
@@ -110,7 +110,7 @@ namespace Acos.ProgrammingTask.Controllers
 
             try
             {
-                await _userService.UpdateUser(user, userDto.Password);
+                await _userService.Update(user, userDto.Password);
                 return Ok();
             }
             catch(UserException ex)
@@ -122,7 +122,7 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _userService.DeleteUser(id);
+            await _userService.Delete(id);
             return Ok();
         }
 

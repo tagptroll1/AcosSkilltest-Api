@@ -9,12 +9,12 @@ namespace Acos.ProgrammingTask.Services
 {
     public interface IWhiteboardService
     {
-        Task<Whiteboard> GetWhiteboardById(int id);
+        Task<Whiteboard> GetById(int id);
         Task<IEnumerable<Whiteboard>> GetAll();
-        Task<Whiteboard> CreateWhiteboard(Whiteboard whiteboard);
+        Task<Whiteboard> Create(Whiteboard whiteboard);
 
-        Task UpdateWhiteboard (Whiteboard whiteboard);
-        Task DeleteWhiteboard (int id);
+        Task Update(Whiteboard whiteboard);
+        Task Delete(int id);
         Task<List<Whiteboard>> GetAllFromUser(User user);
 
     }
@@ -27,7 +27,7 @@ namespace Acos.ProgrammingTask.Services
             _ctx = context;
         }
 
-        public async Task<Whiteboard> CreateWhiteboard(Whiteboard whiteboard)
+        public async Task<Whiteboard> Create(Whiteboard whiteboard)
         {
             if ( await _ctx.Whiteboards.AnyAsync(
                     w => w.Title == whiteboard.Title 
@@ -40,7 +40,7 @@ namespace Acos.ProgrammingTask.Services
             return whiteboard;
         }
 
-        public async Task DeleteWhiteboard(int id)
+        public async Task Delete(int id)
         {
             var board = await _ctx.Whiteboards.FindAsync(id);
             if (board != null)
@@ -53,10 +53,10 @@ namespace Acos.ProgrammingTask.Services
         public async Task<IEnumerable<Whiteboard>> GetAll() =>
             await _ctx.Whiteboards.ToListAsync();
 
-        public async Task<Whiteboard> GetWhiteboardById(int id) =>
+        public async Task<Whiteboard> GetById(int id) =>
             await _ctx.Whiteboards.FindAsync(id);
 
-        public async Task UpdateWhiteboard(Whiteboard boardIn)
+        public async Task Update(Whiteboard boardIn)
         {
             var board = await _ctx.Whiteboards.FindAsync(boardIn.Id);
 

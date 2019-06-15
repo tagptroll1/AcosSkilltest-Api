@@ -11,11 +11,11 @@ namespace Acos.ProgrammingTask.Services
     public interface IUserService
     {
         Task<User> Authenticate(string username, string password);
-        Task<User> GetUserById(int id);
+        Task<User> GetById(int id);
         Task<IEnumerable<User>> GetAll();
-        Task<User> CreateUser(User user, string password);
-        Task UpdateUser(User user, string password = null);
-        Task DeleteUser(int id);
+        Task<User> Create(User user, string password);
+        Task Update(User user, string password = null);
+        Task Delete(int id);
         Task<User> JustFindHim(string query);
     }
 
@@ -64,11 +64,11 @@ namespace Acos.ProgrammingTask.Services
             return user;
         }
 
-        public async Task<User> GetUserById(int id) => 
+        public async Task<User> GetById(int id) => 
             await _ctx.Users.FindAsync(id);
         
 
-        public async Task<User> CreateUser(User user, string password)
+        public async Task<User> Create(User user, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new UserException("Password is required");
@@ -89,7 +89,7 @@ namespace Acos.ProgrammingTask.Services
             return user;
         }
 
-        public async Task DeleteUser(int id)
+        public async Task Delete(int id)
         {
             var user = await _ctx.Users.FindAsync(id);
             if (user != null)
@@ -103,7 +103,7 @@ namespace Acos.ProgrammingTask.Services
         public async Task<IEnumerable<User>> GetAll() =>
             await _ctx.Users.ToListAsync();
 
-        public async Task UpdateUser(User userIn, string password)
+        public async Task Update(User userIn, string password)
         {
             var user = await _ctx.Users.FindAsync(userIn.Id);
 

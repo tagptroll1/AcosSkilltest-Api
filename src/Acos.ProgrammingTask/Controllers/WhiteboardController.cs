@@ -30,7 +30,7 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var board = await _boardService.GetWhiteboardById(id);
+            var board = await _boardService.GetById(id);
             var boardDto = _mapper.Map<WhiteboardDtoOut>(board);
 
             if (board == null)
@@ -51,7 +51,7 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpGet("user/{id}")]
         public async Task<IActionResult> GetAllFromUser(int id)
         {
-            var user = await _userService.GetUserById(id);
+            var user = await _userService.GetById(id);
             if (user == null)
                 return NotFound("User does not exist");
 
@@ -85,7 +85,7 @@ namespace Acos.ProgrammingTask.Controllers
 
             try
             {
-                await _boardService.CreateWhiteboard(board);
+                await _boardService.Create(board);
                 return CreatedAtAction(nameof(GetById), new { id = boardDto.Id }, boardDto);
             }
             catch (WhiteboardException ex)
@@ -100,7 +100,7 @@ namespace Acos.ProgrammingTask.Controllers
             var board = _mapper.Map<Whiteboard>(boardIn);
             try
             {
-                await _boardService.UpdateWhiteboard(board);
+                await _boardService.Update(board);
                 return Ok();
             }
             catch (WhiteboardException ex)
@@ -112,7 +112,7 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _boardService.DeleteWhiteboard(id);
+            await _boardService.Delete(id);
             return Ok();
         }
     }
