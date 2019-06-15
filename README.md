@@ -398,3 +398,24 @@ Deletes a Whiteboard by id
 **Returns:**
 * 200 Ok
 * 401 Unauthorized - Token is invalid
+
+--------
+
+### /postit
+
+#### GET /postit/{id}
+Gets a postit object by the `id` parameter. 
+This endpoint will map the User returned to just Id, Email and Username.
+
+**Returns:**
+* 200 Ok - Got the Postit
+* 401 Unauthorized - Token is invalid
+* 404 Not Found - postit does not exist  
+
+**Example usage:**  
+```http
+GET http://localhost/postit/1
+Authorization: Bearer <Token>
+```
+
+**Example result:**

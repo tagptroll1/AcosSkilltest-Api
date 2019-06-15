@@ -49,7 +49,7 @@ namespace Acos.ProgrammingTask.Controllers
             {
                 Subject = new ClaimsIdentity( new Claim[] 
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.UserId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials( new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -59,7 +59,7 @@ namespace Acos.ProgrammingTask.Controllers
             var tokenString = tokenHandler.WriteToken(token);
             
             return Ok( new {
-                Id = user.Id,
+                Id = user.UserId,
                 Username = user.Username,
                 Token = tokenString
             });
@@ -106,7 +106,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> Update(int id, [FromBody]UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            user.Id = id;
+            user.UserId = id;
 
             try
             {

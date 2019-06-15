@@ -68,24 +68,26 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpPost("new")]
         public async Task<IActionResult> CreateNew([FromBody]WhiteboardDtoIn boardDto)
         {
-            if (boardDto.Owner == null)
+            if (boardDto.User == null)
                 return BadRequest(new { message = "You must provide a Owner id, email or username to the Owner field" });
 
-            var owner = await _userService.JustFindHim(boardDto.Owner);
+            var owner = await _userService.JustFindHim(boardDto.User);
 
             if (owner == null)
                 return BadRequest("Could not find User associated to the Owner field");
 
             var board = new Whiteboard()
             {
-                Id = boardDto.Id,
+                WhiteboardId = boardDto.Id,
                 Title = boardDto.Title,
-                Owner = owner
+                User = owner
             };
 
             try
             {
                 await _boardService.Create(board);
+                owner.Whiteboards.Add(board);
+                await _userService.Update(owner);
                 return CreatedAtAction(nameof(GetById), new { id = boardDto.Id }, boardDto);
             }
             catch (WhiteboardException ex)

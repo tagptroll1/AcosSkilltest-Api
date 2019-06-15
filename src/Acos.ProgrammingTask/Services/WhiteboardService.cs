@@ -16,6 +16,7 @@ namespace Acos.ProgrammingTask.Services
         Task Update(Whiteboard whiteboard);
         Task Delete(int id);
         Task<List<Whiteboard>> GetAllFromUser(User user);
+        Task<List<Postit>> GetAllPostits(int boardId);
 
     }
     public class WhiteboardService : IWhiteboardService
@@ -31,7 +32,7 @@ namespace Acos.ProgrammingTask.Services
         {
             if ( await _ctx.Whiteboards.AnyAsync(
                     w => w.Title == whiteboard.Title 
-                    && w.Owner.Id == whiteboard.Owner.Id))
+                    && w.User.UserId == whiteboard.User.UserId))
                 throw new WhiteboardException("You already have a whiteboard with this title");
 
             await _ctx.Whiteboards.AddAsync(whiteboard);
@@ -58,7 +59,7 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task Update(Whiteboard boardIn)
         {
-            var board = await _ctx.Whiteboards.FindAsync(boardIn.Id);
+            var board = await _ctx.Whiteboards.FindAsync(boardIn.WhiteboardId);
 
             board.Title = boardIn.Title;
 
@@ -69,10 +70,19 @@ namespace Acos.ProgrammingTask.Services
         public async Task<List<Whiteboard>> GetAllFromUser(User user)
         {
             var boards = await _ctx.Whiteboards
-                .Where(w => w.Owner.Id == user.Id)
+                .Where(w => w.User.UserId == user.UserId)
                 .ToListAsync();
 
             return boards;
+        }
+
+        public async Task<List<Postit>> GetAllPostits(int boardId)
+        {
+            var notes = await _ctx.Postits
+                .Where(p => p.Whiteboard.WhiteboardId == boardId)
+                .ToListAsync();
+
+            return notes;
         }
     }
 }

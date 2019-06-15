@@ -3,11 +3,11 @@ namespace Acos.ProgrammingTask.Models
 {
     public class Whiteboard
     {
-        public int Id { get; set; }
+        public int WhiteboardId { get; set; }
 
         public string Title { get; set; }
 
-        public User Owner { get; set; }
+        public User User { get; set; }
         
     }
 
@@ -19,7 +19,7 @@ namespace Acos.ProgrammingTask.Models
 
         public string Title { get; set; }
 
-        public string Owner { get; set; }
+        public string User { get; set; }
     }
 
     public class WhiteboardDtoOut
@@ -30,6 +30,6 @@ namespace Acos.ProgrammingTask.Models
 
         public string Title { get; set; }
 
-        public UserDto Owner { get; set; }
+        public UserDto User { get; set; }
     }
 }

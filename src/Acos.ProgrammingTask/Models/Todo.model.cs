@@ -7,8 +7,19 @@ namespace Acos.ProgrammingTask.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public DateTime created { get; set; }
+        public DateTime Created { get; set; }
         public bool Finished { get; set; }
-        public PostIt PostIt { get; set; }
+        public int PostitForeignKey { get; set; }
+        public Postit Postit { get; set; }
     }
+
+    public class TodoDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public DateTime Created { get; set; }
+        public bool Finished { get; set; }
+    }
+
 }

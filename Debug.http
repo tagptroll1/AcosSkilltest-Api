@@ -85,7 +85,7 @@ Content-Type: application/json
 
 {
     "Title": "Must be done",
-    "Owner": "bob123"
+    "User": "bob123"
 }
 
 ### Get Whiteboard id 1
@@ -100,4 +100,30 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6I
 
 ### Get all whiteboards
 GET http://localhost:5000/whiteboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
+
+
+#### POSTITS
+
+### Create new postit
+POST http://localhost:5000/postit/new
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
+
+{
+    "WhiteboardId": 1,
+    "UserId": 1,
+    "Color": "#FFFAAA",
+    "X": 200,
+    "Y": 200,
+    "Todo":{
+        "Title": "Visit mom",
+        "Content": "Shes been quite lonely lately",
+        "Created": "2014-01-01T23:28:56.782Z",
+        "Finished": false
+    }
+}
+
+### Get postit with id 1
+GET http://localhost:5000/postit/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s

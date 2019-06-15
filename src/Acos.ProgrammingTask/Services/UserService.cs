@@ -17,6 +17,7 @@ namespace Acos.ProgrammingTask.Services
         Task Update(User user, string password = null);
         Task Delete(int id);
         Task<User> JustFindHim(string query);
+        Task<List<Postit>> GetAllPostits(int userId);
     }
 
     public class UserService : IUserService
@@ -28,6 +29,14 @@ namespace Acos.ProgrammingTask.Services
             _ctx = context;
         }
 
+        public async Task<List<Postit>> GetAllPostits(int userId)
+        {
+            var notes = await _ctx.Postits
+                .Where(p => p.Owner.UserId == userId)
+                .ToListAsync();
+            
+            return notes;
+        }
         public async Task<User> JustFindHim(string query)
         {
             User user;
@@ -105,7 +114,7 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task Update(User userIn, string password)
         {
-            var user = await _ctx.Users.FindAsync(userIn.Id);
+            var user = await _ctx.Users.FindAsync(userIn.UserId);
 
             if (user == null)
                 throw new UserException("User not found");

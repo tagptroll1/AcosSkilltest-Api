@@ -1,13 +1,16 @@
 
+using System.Collections.Generic;
+
 namespace Acos.ProgrammingTask.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
         public byte[] PassHash { get; set; }
         public byte[] PassSalt { get; set; }
+        public List<Whiteboard> Whiteboards { get; set; }
     }
 
     public class UserDto
