@@ -24,6 +24,10 @@ namespace Acos.ProgrammingTask.Utils
                 .HasOne(w => w.User)
                 .WithMany(u => u.Whiteboards)
                 .IsRequired();
+
+            modelBuilder.Entity<Postit>()
+                .HasOne(x => x.Whiteboard)
+                .WithMany(x => x.Postits);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task Delete(int id)
         {
-            var note = await _ctx.Postits.FindAsync(id);
+            var note = await GetById(id);
             if (note != null)
             {
                 _ctx.Postits.Remove(note);
@@ -44,17 +44,21 @@ namespace Acos.ProgrammingTask.Services
         }
 
         public async Task<List<Postit>> GetAll() => 
-            await _ctx.Postits.ToListAsync();
+            await _ctx.Postits
+                .Include(x => x.Todo)
+                .ToListAsync();
 
         public async Task<Postit> GetById(int id) => 
-            await _ctx.Postits.FindAsync(id);
+            await _ctx.Postits
+                .Include(x => x.Todo)
+                .SingleAsync(x => x.Id == id);
 
         public async Task Update(Postit postit)
         {
-            var note = await _ctx.Postits.FindAsync(postit.Id);
-            note.Owner = postit.Owner;
+            var note = await GetById(postit.Id);
+
             note.Todo = postit.Todo;
-            note.Whiteboard = postit.Whiteboard;
+            note.Color = postit.Color;
             note.X = postit.X;
             note.Y = postit.Y;
 

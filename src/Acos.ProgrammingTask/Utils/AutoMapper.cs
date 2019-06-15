@@ -13,8 +13,8 @@ namespace Acos.ProgrammingTask.Utils
             CreateMap<Whiteboard, WhiteboardDtoOut>();
             CreateMap<WhiteboardDtoIn, Whiteboard>();
             CreateMap<WhiteboardDtoIn, WhiteboardDtoOut>();
-            CreateMap<Postit, PostitDtoOut>();
-            CreateMap<PostitDtoOut, Postit>();
+            CreateMap<Postit, PostitDtoIn>();
+            CreateMap<PostitDtoIn, Postit>();
             CreateMap<TodoDto, Todo>();
             CreateMap<Todo, TodoDto>();
         }

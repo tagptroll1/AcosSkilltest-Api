@@ -31,28 +31,26 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task<List<Postit>> GetAllPostits(int userId)
         {
-            var notes = await _ctx.Postits
-                .Where(p => p.Owner.UserId == userId)
-                .ToListAsync();
-            
-            return notes;
+            var user = await _ctx.Users
+                .Include(x => x.Whiteboards)
+                    .ThenInclude(x => x.Postits)
+                        .ThenInclude(x => x.Todo)
+                .FirstAsync(x => x.UserId == userId);
+
+            List<Postit> postits = new List<Postit>();
+
+            foreach(Whiteboard wb in user.Whiteboards)
+            {
+                postits.AddRange(wb.Postits);
+            }
+
+            return postits;
         }
         public async Task<User> JustFindHim(string query)
         {
-            User user;
-
-            try {
-                var id = Int32.Parse(query);
-                user = await _ctx.Users.FindAsync(id);
-
-                if (user != null)
-                    return user;
-            }
-            catch (Exception){}
-
-            user =  await _ctx.Users
-                .Where(u => u.Username == query || u.Email == query)
-                .FirstOrDefaultAsync();
+            var user =  await _ctx.Users
+                .Include(x => x.Whiteboards)
+                .FirstAsync(u => u.Username == query || u.Email == query);
 
             return user;
         }
@@ -74,9 +72,12 @@ namespace Acos.ProgrammingTask.Services
         }
 
         public async Task<User> GetById(int id) => 
-            await _ctx.Users.FindAsync(id);
+            await _ctx.Users
+                .Include(x => x.Whiteboards)
+                    .ThenInclude(x => x.Postits)
+                        .ThenInclude(x => x.Todo)
+                .FirstAsync(x => x.UserId == id);
         
-
         public async Task<User> Create(User user, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -100,7 +101,7 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task Delete(int id)
         {
-            var user = await _ctx.Users.FindAsync(id);
+            var user = await GetById(id);
             if (user != null)
             {
                 _ctx.Users.Remove(user);
@@ -110,11 +111,15 @@ namespace Acos.ProgrammingTask.Services
         }
 
         public async Task<IEnumerable<User>> GetAll() =>
-            await _ctx.Users.ToListAsync();
+            await _ctx.Users
+                .Include(x => x.Whiteboards)
+                    .ThenInclude(x => x.Postits)
+                        .ThenInclude(x => x.Todo)
+                .ToListAsync();
 
         public async Task Update(User userIn, string password)
         {
-            var user = await _ctx.Users.FindAsync(userIn.UserId);
+            var user = await GetById(userIn.UserId);
 
             if (user == null)
                 throw new UserException("User not found");

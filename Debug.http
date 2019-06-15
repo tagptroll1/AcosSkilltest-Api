@@ -79,13 +79,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6I
 ##### WHITEBOARD
 
 ### Create new whiteboard
-POST http://localhost:5000/whiteboard/new
+POST http://localhost:5000/whiteboard/new?user=1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjA0NTU3MzQsImV4cCI6MTU2MTA2MDUzNCwiaWF0IjoxNTYwNDU1NzM0fQ._pOkcKstj1JA67wFr-D6gN7Q28ghr8AyrNHPt9SJM2s
 Content-Type: application/json
 
 {
     "Title": "Must be done",
-    "User": "bob123"
 }
 
 ### Get Whiteboard id 1

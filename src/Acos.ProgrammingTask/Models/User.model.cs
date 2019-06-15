@@ -10,7 +10,7 @@ namespace Acos.ProgrammingTask.Models
         public string Username { get; set; }
         public byte[] PassHash { get; set; }
         public byte[] PassSalt { get; set; }
-        public List<Whiteboard> Whiteboards { get; set; }
+        public ICollection<Whiteboard> Whiteboards { get; set; }
     }
 
     public class UserDto

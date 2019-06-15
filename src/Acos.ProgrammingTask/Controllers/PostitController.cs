@@ -33,7 +33,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetAll()
         {
             var note = await _postitService.GetAll();
-            var notes = _mapper.Map<List<PostitDtoOut>>(note);
+            var notes = _mapper.Map<List<Postit>>(note);
 
             if (notes.Count == 0)
                 return NotFound();
@@ -44,7 +44,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var note = await _postitService.GetById(id);
-            var noteDto = _mapper.Map<PostitDtoOut>(note);
+            var noteDto = _mapper.Map<Postit>(note);
 
             if (note == null)
                 return NotFound();
@@ -55,7 +55,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetByUserId(int userid)
         {
             var notes = await _userService.GetAllPostits(userid);
-            var notesDto = _mapper.Map<List<PostitDtoOut>>(notes);
+            var notesDto = _mapper.Map<List<Postit>>(notes);
 
             if (notesDto.Count == 0)
                 return NotFound();
@@ -66,7 +66,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetByWhiteboardId(int boardId)
         {
             var notes = await _boardService.GetAllPostits(boardId);
-            var NotesDto = _mapper.Map<List<PostitDtoOut>>(notes);
+            var NotesDto = _mapper.Map<List<Postit>>(notes);
 
             if (NotesDto.Count == 0)
                 return NotFound();
@@ -76,27 +76,19 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpPost("new")]
         public async Task<IActionResult> Create(PostitDtoIn postit)
         {
-            var owner = await _userService.GetById(postit.UserId);
             var board = await _boardService.GetById(postit.WhiteboardId);
             var todo = _mapper.Map<Todo>(postit.Todo);
-
-            var note = new Postit()
-            {
-                Id = postit.Id,
-                Todo = todo,
-                Whiteboard = board,
-                Owner = owner,
-                Color = postit.Color,
-                X = postit.X,
-                Y = postit.Y
-            };
+            var note = _mapper.Map<Postit>(postit);
+            //note.Todo = todo;
 
             await _postitService.Create(note);
 
-            var noteOut = _mapper.Map<PostitDtoOut>(note);
-            
-            return CreatedAtAction(nameof (GetById), new { id = noteOut.Id}, noteOut);
+            return CreatedAtAction(nameof (GetById), new { id = note.Id}, note);
         }
 
     }
 }
+
+// Newtonsoft.Json.JsonSerializationException: 
+// Self referencing loop detected for property 'postit' 
+// with type 'Acos.ProgrammingTask.Models.Postit'. Path 'todo'.

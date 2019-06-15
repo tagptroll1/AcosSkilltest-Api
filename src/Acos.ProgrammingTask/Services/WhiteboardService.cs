@@ -32,7 +32,7 @@ namespace Acos.ProgrammingTask.Services
         {
             if ( await _ctx.Whiteboards.AnyAsync(
                     w => w.Title == whiteboard.Title 
-                    && w.User.UserId == whiteboard.User.UserId))
+                    && w.UserId == whiteboard.UserId))
                 throw new WhiteboardException("You already have a whiteboard with this title");
 
             await _ctx.Whiteboards.AddAsync(whiteboard);
@@ -43,7 +43,7 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task Delete(int id)
         {
-            var board = await _ctx.Whiteboards.FindAsync(id);
+            var board = await GetById(id);
             if (board != null)
             {
                 _ctx.Whiteboards.Remove(board);
@@ -52,14 +52,20 @@ namespace Acos.ProgrammingTask.Services
         }
 
         public async Task<IEnumerable<Whiteboard>> GetAll() =>
-            await _ctx.Whiteboards.ToListAsync();
+            await _ctx.Whiteboards
+                .Include(x => x.Postits)
+                    .ThenInclude(x => x.Todo)       
+                .ToListAsync();
 
         public async Task<Whiteboard> GetById(int id) =>
-            await _ctx.Whiteboards.FindAsync(id);
+            await _ctx.Whiteboards
+                .Include(x => x.Postits)       
+                    .ThenInclude(x => x.Todo)       
+                .FirstAsync(x => x.WhiteboardId == id);
 
         public async Task Update(Whiteboard boardIn)
         {
-            var board = await _ctx.Whiteboards.FindAsync(boardIn.WhiteboardId);
+            var board = await GetById(boardIn.WhiteboardId);
 
             board.Title = boardIn.Title;
 
@@ -70,7 +76,9 @@ namespace Acos.ProgrammingTask.Services
         public async Task<List<Whiteboard>> GetAllFromUser(User user)
         {
             var boards = await _ctx.Whiteboards
-                .Where(w => w.User.UserId == user.UserId)
+                .Include(x => x.Postits)
+                    .ThenInclude(x => x.Todo)
+                .Where(w => w.UserId == user.UserId)
                 .ToListAsync();
 
             return boards;
@@ -79,7 +87,7 @@ namespace Acos.ProgrammingTask.Services
         public async Task<List<Postit>> GetAllPostits(int boardId)
         {
             var notes = await _ctx.Postits
-                .Where(p => p.Whiteboard.WhiteboardId == boardId)
+                .Where(p => p.Whiteboard.User.UserId == boardId)
                 .ToListAsync();
 
             return notes;

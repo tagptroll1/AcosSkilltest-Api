@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Acos.ProgrammingTask.Models
 {
@@ -9,8 +10,10 @@ namespace Acos.ProgrammingTask.Models
         public string Content { get; set; }
         public DateTime Created { get; set; }
         public bool Finished { get; set; }
-        public int PostitForeignKey { get; set; }
+        
+        [ForeignKey("PostitForeignKey")]
         public Postit Postit { get; set; }
+        public int PostitForeignKey{get; set;}
     }
 
     public class TodoDto
