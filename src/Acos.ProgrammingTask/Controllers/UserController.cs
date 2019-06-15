@@ -33,6 +33,21 @@ namespace Acos.ProgrammingTask.Controllers
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
+        
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]UserDto userDto)
+        {
+            var user = _mapper.Map<User>(userDto);
+            try {
+                await _userService.Create(user, userDto.Password);
+                return CreatedAtAction(nameof(GetById), new { id = userDto.Id}, userDto);
+            }
+            catch(UserException ex)
+            {
+                return BadRequest(new { message = ex.Message});
+            }
+        }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -65,20 +80,7 @@ namespace Acos.ProgrammingTask.Controllers
             });
         }
 
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]UserDto userDto)
-        {
-            var user = _mapper.Map<User>(userDto);
-            try {
-                await _userService.Create(user, userDto.Password);
-                return CreatedAtAction(nameof(GetById), new { id = userDto.Id}, userDto);
-            }
-            catch(UserException ex)
-            {
-                return BadRequest(new { message = ex.Message});
-            }
-        }
+        
 
         [HttpGet]
         public async Task<IActionResult> GetAll()

@@ -77,7 +77,7 @@ namespace Acos.ProgrammingTask.Controllers
             {
                 WhiteboardId = boardDto.Id,
                 Title = boardDto.Title,
-                UserId = owner.UserId
+                User = owner
             };
 
             try

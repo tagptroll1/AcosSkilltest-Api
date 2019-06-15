@@ -33,7 +33,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetAll()
         {
             var note = await _postitService.GetAll();
-            var notes = _mapper.Map<List<Postit>>(note);
+            var notes = _mapper.Map<List<PostitDtoIn>>(note);
 
             if (notes.Count == 0)
                 return NotFound();
@@ -44,7 +44,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var note = await _postitService.GetById(id);
-            var noteDto = _mapper.Map<Postit>(note);
+            var noteDto = _mapper.Map<PostitDtoIn>(note);
 
             if (note == null)
                 return NotFound();
@@ -55,7 +55,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetByUserId(int userid)
         {
             var notes = await _userService.GetAllPostits(userid);
-            var notesDto = _mapper.Map<List<Postit>>(notes);
+            var notesDto = _mapper.Map<List<PostitDtoIn>>(notes);
 
             if (notesDto.Count == 0)
                 return NotFound();
@@ -66,7 +66,7 @@ namespace Acos.ProgrammingTask.Controllers
         public async Task<IActionResult> GetByWhiteboardId(int boardId)
         {
             var notes = await _boardService.GetAllPostits(boardId);
-            var NotesDto = _mapper.Map<List<Postit>>(notes);
+            var NotesDto = _mapper.Map<List<PostitDtoIn>>(notes);
 
             if (NotesDto.Count == 0)
                 return NotFound();
@@ -83,7 +83,7 @@ namespace Acos.ProgrammingTask.Controllers
 
             await _postitService.Create(note);
 
-            return CreatedAtAction(nameof (GetById), new { id = note.Id}, note);
+            return CreatedAtAction(nameof (GetById), new { id = postit.Id}, postit);
         }
 
     }
