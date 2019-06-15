@@ -45,7 +45,7 @@ namespace Acos.ProgrammingTask.Controllers
             }
             catch(UserException ex)
             {
-                return BadRequest(new { message = ex.Message});
+                return BadRequest(ex);
             }
         }
 

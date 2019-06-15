@@ -27,8 +27,8 @@ namespace Acos.ProgrammingTask
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<DatabaseContext>( x => x.UseInMemoryDatabase("TempDB"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<DatabaseContext>( x => x.UseInMemoryDatabase("TempDB"));
             services.AddAutoMapper();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -85,10 +85,11 @@ namespace Acos.ProgrammingTask
                 app.UseHsts();
             }
 
-            app.UseCors( x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
+            app.UseCors(
+                options => options
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
             );
 
             app.UseAuthentication();
