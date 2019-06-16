@@ -18,7 +18,7 @@ namespace Acos.ProgrammingTask.Models
         
         [Required]
         public TodoDto Todo { get; set; }
-        public int WhiteboardId { get; set; }
+        public WhiteboardDtoIn Whiteboard { get; set; }
         public string Color { get; set; }
         public int X { get; set; }
         public int Y { get; set; }

@@ -37,7 +37,7 @@ namespace Acos.ProgrammingTask.Controllers
 
             if (notes.Count == 0)
                 return NotFound();
-            return Ok(note);
+            return Ok(notes);
         }
 
         [HttpGet("{id}")]
@@ -51,10 +51,10 @@ namespace Acos.ProgrammingTask.Controllers
             return Ok(noteDto);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetByUserId(int userid)
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetByUserId(int id)
         {
-            var notes = await _userService.GetAllPostits(userid);
+            var notes = await _userService.GetAllPostits(id);
             var notesDto = _mapper.Map<List<PostitDtoIn>>(notes);
 
             if (notesDto.Count == 0)
@@ -62,10 +62,10 @@ namespace Acos.ProgrammingTask.Controllers
             return Ok(notesDto);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetByWhiteboardId(int boardId)
+        [HttpGet("whiteboard/{id}")]
+        public async Task<IActionResult> GetByWhiteboardId(int id)
         {
-            var notes = await _boardService.GetAllPostits(boardId);
+            var notes = await _boardService.GetAllPostits(id);
             var NotesDto = _mapper.Map<List<PostitDtoIn>>(notes);
 
             if (NotesDto.Count == 0)
@@ -76,7 +76,9 @@ namespace Acos.ProgrammingTask.Controllers
         [HttpPost("new")]
         public async Task<IActionResult> Create(PostitDtoIn postit)
         {
-            var board = await _boardService.GetById(postit.WhiteboardId);
+            if (postit.Whiteboard == null)
+                return BadRequest("A whiteboard must be provided to add a note to");
+            var board = await _boardService.GetById(postit.Whiteboard.Id);
             var todo = _mapper.Map<Todo>(postit.Todo);
             var note = _mapper.Map<Postit>(postit);
             //note.Todo = todo;

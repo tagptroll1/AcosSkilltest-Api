@@ -32,7 +32,7 @@ namespace Acos.ProgrammingTask.Services
         {
             if ( await _ctx.Whiteboards.AnyAsync(
                     w => w.Title == whiteboard.Title 
-                    && w.User.UserId == whiteboard.User.UserId))
+                    && w.User.Id == whiteboard.User.Id))
                 throw new WhiteboardException("You already have a whiteboard with this title");
 
             await _ctx.Whiteboards.AddAsync(whiteboard);
@@ -61,11 +61,11 @@ namespace Acos.ProgrammingTask.Services
             await _ctx.Whiteboards
                 .Include(x => x.Postits)       
                     .ThenInclude(x => x.Todo)       
-                .FirstAsync(x => x.WhiteboardId == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task Update(Whiteboard boardIn)
         {
-            var board = await GetById(boardIn.WhiteboardId);
+            var board = await GetById(boardIn.Id);
 
             board.Title = boardIn.Title;
 
@@ -78,7 +78,7 @@ namespace Acos.ProgrammingTask.Services
             var boards = await _ctx.Whiteboards
                 .Include(x => x.Postits)
                     .ThenInclude(x => x.Todo)
-                .Where(w => w.User.UserId == user.UserId)
+                .Where(w => w.User.Id == user.Id)
                 .ToListAsync();
 
             return boards;
@@ -87,7 +87,7 @@ namespace Acos.ProgrammingTask.Services
         public async Task<List<Postit>> GetAllPostits(int boardId)
         {
             var notes = await _ctx.Postits
-                .Where(p => p.Whiteboard.User.UserId == boardId)
+                .Where(p => p.Whiteboard.Id == boardId)
                 .ToListAsync();
 
             return notes;

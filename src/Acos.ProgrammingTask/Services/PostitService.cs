@@ -51,7 +51,7 @@ namespace Acos.ProgrammingTask.Services
         public async Task<Postit> GetById(int id) => 
             await _ctx.Postits
                 .Include(x => x.Todo)
-                .SingleAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task Update(Postit postit)
         {

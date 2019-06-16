@@ -31,26 +31,15 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task<List<Postit>> GetAllPostits(int userId)
         {
-            var user = await _ctx.Users
-                .Include(x => x.Whiteboards)
-                    .ThenInclude(x => x.Postits)
-                        .ThenInclude(x => x.Todo)
-                .FirstAsync(x => x.UserId == userId);
-
-            List<Postit> postits = new List<Postit>();
-
-            foreach(Whiteboard wb in user.Whiteboards)
-            {
-                postits.AddRange(wb.Postits);
-            }
-
-            return postits;
+            return await _ctx.Postits
+                .Where(p => p.Whiteboard.User.Id == userId)
+                .ToListAsync();
         }
         public async Task<User> JustFindHim(string query)
         {
             var user =  await _ctx.Users
                 .Include(x => x.Whiteboards)
-                .FirstAsync(u => u.Username == query || u.Email == query);
+                .FirstOrDefaultAsync(u => u.Username == query || u.Email == query);
 
             return user;
         }
@@ -74,9 +63,9 @@ namespace Acos.ProgrammingTask.Services
         public async Task<User> GetById(int id) => 
             await _ctx.Users
                 .Include(x => x.Whiteboards)
-                    .ThenInclude(x => x.Postits)
-                        .ThenInclude(x => x.Todo)
-                .FirstAsync(x => x.UserId == id);
+                        .ThenInclude(x => x.Postits)
+                            .ThenInclude(x => x.Todo)
+                .FirstOrDefaultAsync(x => x.Id == id);
         
         public async Task<User> Create(User user, string password)
         {
@@ -119,7 +108,7 @@ namespace Acos.ProgrammingTask.Services
 
         public async Task Update(User userIn, string password)
         {
-            var user = await GetById(userIn.UserId);
+            var user = await GetById(userIn.Id);
 
             if (user == null)
                 throw new UserException("User not found");

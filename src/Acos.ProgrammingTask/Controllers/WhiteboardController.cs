@@ -75,7 +75,7 @@ namespace Acos.ProgrammingTask.Controllers
 
             var board = new Whiteboard()
             {
-                WhiteboardId = boardDto.Id,
+                Id = boardDto.Id,
                 Title = boardDto.Title,
                 User = owner
             };

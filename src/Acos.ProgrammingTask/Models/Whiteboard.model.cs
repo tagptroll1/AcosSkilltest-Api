@@ -5,7 +5,7 @@ namespace Acos.ProgrammingTask.Models
 {
     public class Whiteboard
     {
-        public int WhiteboardId { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public ICollection<Postit> Postits { get; set; }
         public User User { get; set; }

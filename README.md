@@ -1,5 +1,9 @@
 # Programming-Task: Todo App  
 
+## Commands used
+`dotnet ef migrations add initial` - Migrate postgres  
+`dotnet ef database update` - Update / create tables
+
 ## API
 Note: Most endpoints require the Authorization header with a token provided by the api from /user/authenticate.  Endpoints marked with **Anonymous** does not require the token.
 
