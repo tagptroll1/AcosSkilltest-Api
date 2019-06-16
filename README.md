@@ -1,8 +1,17 @@
 # Programming-Task: Todo App  
 
 ## Commands used
+Database configurations set for a localhost postgresql database:
+* Host=localhost
+* Port=5432
+* Username=postgres
+* Password=Coolasice1996  
+* Database=TodoApi  
+
 `dotnet ef migrations add initial` - Migrate postgres  
 `dotnet ef database update` - Update / create tables
+
+
 
 ## API
 Note: Most endpoints require the Authorization header with a token provided by the api from /user/authenticate.  Endpoints marked with **Anonymous** does not require the token.
