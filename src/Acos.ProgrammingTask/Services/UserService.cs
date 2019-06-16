@@ -118,9 +118,10 @@ namespace Acos.ProgrammingTask.Services
                 // Username has changed
                 if (await _ctx.Users.AnyAsync(u => u.Username == userIn.Username))
                     throw new UserException($"Username \"{userIn.Username}\" is already taken");
+                
+                user.Username = userIn.Username;
             }
 
-            user.Username = userIn.Username;
 
             if (!string.IsNullOrWhiteSpace(password))
             {

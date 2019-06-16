@@ -22,6 +22,6 @@ namespace Acos.ProgrammingTask.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public UserDto User { get; set; }
-        public List<Postit> Postits { get; set; }
+        public List<PostitDtoIn> Postits { get; set; }
     }
 }

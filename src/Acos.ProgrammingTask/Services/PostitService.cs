@@ -57,10 +57,32 @@ namespace Acos.ProgrammingTask.Services
         {
             var note = await GetById(postit.Id);
 
-            note.Todo = postit.Todo;
-            note.Color = postit.Color;
-            note.X = postit.X;
-            note.Y = postit.Y;
+            if (note == null)
+            {
+                await _ctx.Postits.AddAsync(postit);
+                await _ctx.SaveChangesAsync();
+                return;
+            }
+
+            var editTodo = await _ctx.Todos.SingleAsync(x=>x.Id==postit.Todo.Id);
+            if (editTodo.Content != postit.Todo.Content)
+            {
+                editTodo.Content = postit.Todo.Content;
+            }
+            if (editTodo.Title != postit.Todo.Title)
+            {
+                editTodo.Title = postit.Todo.Title;
+            }
+            _ctx.Todos.Update(editTodo);
+
+            if (note.Color != postit.Color)
+                note.Color = postit.Color;
+
+            if (note.X != postit.X)
+                note.X = postit.X;
+
+            if (note.Y != postit.Y)
+                note.Y = postit.Y;
 
             _ctx.Postits.Update(note);
             await _ctx.SaveChangesAsync();

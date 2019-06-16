@@ -78,14 +78,22 @@ namespace Acos.ProgrammingTask.Controllers
         {
             if (postit.Whiteboard == null)
                 return BadRequest("A whiteboard must be provided to add a note to");
-            var board = await _boardService.GetById(postit.Whiteboard.Id);
-            var todo = _mapper.Map<Todo>(postit.Todo);
             var note = _mapper.Map<Postit>(postit);
-            //note.Todo = todo;
 
             await _postitService.Create(note);
 
             return CreatedAtAction(nameof (GetById), new { id = postit.Id}, postit);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(PostitDtoIn postit)
+        {
+            if (postit.Whiteboard == null)
+                return BadRequest("Whiteboard must be given");
+
+            var note = _mapper.Map<Postit>(postit);
+            await _postitService.Update(note);
+            return Ok();
         }
 
     }
