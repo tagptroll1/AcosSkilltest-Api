@@ -83,8 +83,6 @@ namespace Acos.ProgrammingTask.Controllers
             try
             {
                 await _boardService.Create(board);
-                owner.Whiteboards.Add(board);
-                await _userService.Update(owner);
                 return CreatedAtAction(nameof(GetById), new { id = boardDto.Id }, boardDto);
             }
             catch (WhiteboardException ex)

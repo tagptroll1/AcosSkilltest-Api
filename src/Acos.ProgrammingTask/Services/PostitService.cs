@@ -64,16 +64,10 @@ namespace Acos.ProgrammingTask.Services
                 return;
             }
 
-            var editTodo = await _ctx.Todos.SingleAsync(x=>x.Id==postit.Todo.Id);
-            if (editTodo.Content != postit.Todo.Content)
-            {
-                editTodo.Content = postit.Todo.Content;
-            }
-            if (editTodo.Title != postit.Todo.Title)
-            {
-                editTodo.Title = postit.Todo.Title;
-            }
-            _ctx.Todos.Update(editTodo);
+            note.Todo.Content = postit.Todo.Content;
+            note.Todo.Title = postit.Todo.Title;
+            note.Todo.Finished = postit.Todo.Finished;
+        
 
             if (note.Color != postit.Color)
                 note.Color = postit.Color;

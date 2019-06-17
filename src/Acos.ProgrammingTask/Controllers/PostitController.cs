@@ -96,6 +96,12 @@ namespace Acos.ProgrammingTask.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id) {
+            await _postitService.Delete(id);
+            return Ok();
+        }
+
     }
 }
 

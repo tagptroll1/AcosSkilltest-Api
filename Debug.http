@@ -114,12 +114,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6I
     "Whiteboard": {
         "Id": 1
     },
-    "Color": "#FFFAAA",
-    "X": 200,
+    "Color": "#ffffe0",
+    "X": 201,
     "Y": 200,
     "Todo":{
-        "Title": "Visit mom",
-        "Content": "Shes been quite lonely lately",
+        "Title": "Visit ded",
+        "Content": "Shes den quite lonely lately",
         "Created": "2014-01-01T23:28:56.782Z",
         "Finished": false
     }

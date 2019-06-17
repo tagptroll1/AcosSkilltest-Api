@@ -17,6 +17,8 @@ namespace Acos.ProgrammingTask.Utils
             CreateMap<PostitDtoIn, Postit>();
             CreateMap<TodoDto, Todo>();
             CreateMap<Todo, TodoDto>();
+            CreateMap<ReportUserDto, User>();
+            CreateMap<User, ReportUserDto>();
         }
     }
 }
