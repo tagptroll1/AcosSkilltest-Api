@@ -5,7 +5,7 @@ Database configurations set for a localhost postgresql database:
 * Host=localhost
 * Port=5432
 * Username=postgres
-* Password=Coolasice1996  
+
 * Database=TodoApi  
 
 `dotnet ef migrations add initial` - Migrate postgres  
